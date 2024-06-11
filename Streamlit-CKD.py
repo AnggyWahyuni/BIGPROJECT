@@ -8,9 +8,12 @@ try:
         CKD_model = pickle.load(model_file)
     with open('standardscaler.pkl', 'rb') as scaler_file:
         scaler = pickle.load(scaler_file)
+except FileNotFoundError as e:
+    st.error(f"File tidak ditemukan: {e}")
+except ModuleNotFoundError as e:
+    st.error(f"Modul tidak ditemukan: {e}")
 except Exception as e:
-    st.error(f'Error dalam memuat model atau scaler: {e}')
-    st.stop()
+    st.error(f"Kesalahan lain terjadi: {e}")
 
 # Mapping kategori ke keterangan
 PusCellClumps_mapping = {'notpresent': 'Not Present', 'present': 'Present'}
